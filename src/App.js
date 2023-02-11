@@ -1,15 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col } from "antd";
+import { getPokemons } from "./api";
 import Searcher from "./components/Searcher";
 import PokemonList from "./components/PokemonList";
-import getPokemons from "./api";
 import logo from "./statics/logo.svg";
 import "./styles/App.css";
 
 function App() {
+  const [pokemons, setPokemons] = useState([]);
+
   useEffect(() => {
     const fetchPokemons = async () => {
-      await getPokemons();
+      const pokemonsRes = await getPokemons();
+      setPokemons(pokemonsRes);
     };
     fetchPokemons();
   }, []);
@@ -21,7 +24,7 @@ function App() {
       </Col>
       <Col span={8} offset={8}>
         <Searcher />
-        <PokemonList />
+        <PokemonList pokemons={pokemons} />
       </Col>
     </div>
   );
