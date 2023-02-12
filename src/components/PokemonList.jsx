@@ -11,6 +11,7 @@ const PokemonList = ({ pokemons }) => {
             name={pokemon.name}
             image={pokemon.sprites.front_default}
             abilities={pokemon.abilities}
+            types={pokemon.types}
           />
         );
       })}
