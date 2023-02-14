@@ -3,6 +3,7 @@ import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import StarButton from "./StarButton";
 import { setFavorite } from "../actions";
+import style from "../styles/components/PokemonCard.module.css";
 
 const PokemonCard = ({ name, image, abilities, types, id, favorite }) => {
   const dispatch = useDispatch();
@@ -14,13 +15,14 @@ const PokemonCard = ({ name, image, abilities, types, id, favorite }) => {
   const typesString = types.map((pokemon) => pokemon.type.name).join(", ");
 
   const handleOnFavorite = () => {
-    dispatch(setFavorite({pokemonId: id}));
+    dispatch(setFavorite({ pokemonId: id }));
   };
 
   return (
     <Card
+      className={style.card}
       title={name}
-      cover={<img src={image} alt={name} />}
+      cover={<img src={image} alt={name} className={style.pokemon} />}
       extra={<StarButton isFavorite={favorite} onClick={handleOnFavorite} />}
     >
       <Meta
@@ -29,6 +31,7 @@ const PokemonCard = ({ name, image, abilities, types, id, favorite }) => {
         style={{ marginBottom: 10 }}
       />
       <Meta title={"Habilidad"} description={abilitiesPokemon(abilities)} />
+
     </Card>
   );
 };
