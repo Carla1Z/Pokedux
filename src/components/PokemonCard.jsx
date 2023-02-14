@@ -10,11 +10,12 @@ const PokemonCard = ({ name, image, abilities, types, id, favorite }) => {
     return abilities.map((el) => el.ability.name);
   };
 
-  const typesString = types.map((pokemon) => pokemon.type.name).join(", ");
-
   const handleOnFavorite = () => {
     dispatch(setFavorite({ pokemonId: id }));
   };
+
+  const typesString = types.map((pokemon) => pokemon.type.name);
+  console.log(typesString);
 
   const typesColors = {
     bug: { color: "#94BC4A" },
@@ -37,8 +38,19 @@ const PokemonCard = ({ name, image, abilities, types, id, favorite }) => {
     electric: { color: "#E5C531" },
   };
 
+  const styleType = (typesString) => {
+    let background = ''
+    if(typesString.length > 1){
+      background = 'red'
+    }else background= 'blue'
+
+    return{
+      background
+    }
+  }
+
   return (
-    <div className={style.card}>
+    <div style={styleType(typesString)} className={style.card}>
       <span className={style.title}>
         <h4 className={style.name}>{name}</h4>
         <StarButton isFavorite={favorite} onClick={handleOnFavorite} />
